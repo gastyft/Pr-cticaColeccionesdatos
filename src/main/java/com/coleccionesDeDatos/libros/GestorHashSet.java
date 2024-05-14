@@ -3,7 +3,7 @@ package com.coleccionesDeDatos.libros;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class GestorHashSet implements GestorLibros {
+public class GestorHashSet implements GestorLibros,TiemposCalculables {
 
     Set<Libro> libroSet = new HashSet<>();
 
@@ -25,7 +25,7 @@ public class GestorHashSet implements GestorLibros {
     public List<Libro> listarLibrosOrdenadosPorTitulo() {
         List<Libro> libroList = new ArrayList<>();
         try {
-            System.out.println("Como HashSet no permite ordenacion por si sola se implementa el pasaje a TreeSet");
+            //Como HashSet no permite ordenacion por si sola se implementa el pasaje a TreeSet
             Set<Libro> libroTree = new TreeSet<>(libroSet);
             libroList.addAll(libroTree);
         } catch (NullPointerException e) {
@@ -77,6 +77,47 @@ public class GestorHashSet implements GestorLibros {
             System.out.println("No se encontro el titulo a eliminar");
         }
         return flag;
+    }
+    public long agregarTime() {
+        long startTime = System.nanoTime();
+
+// calculo tiempos
+
+        Libro libro1 = new Libro("Baron Rojo", "Saint", 1930);
+        agregarLibro(libro1);
+        Libro libro2 = new Libro("El curioso caso de Benjamín Button", "Scott Fitzgerald", 1921);
+        agregarLibro(libro2);
+        Libro libro3 = new Libro("La Iliada y La Odisea", "Homero", -1500);
+        agregarLibro(libro3);
+
+// Por ejemplo, realizar una operación intensiva en términos de tiempo
+
+        long endTime = System.nanoTime();
+
+
+        return endTime - startTime;
+    }
+
+    public long eliminarTime() {
+        long start = System.nanoTime();
+        eliminarLibro("Baron Rojo");
+        long end = System.nanoTime();
+
+        return end - start;
+    }
+
+    public long buscarTime(){
+        long start=System.nanoTime();
+        buscarLibrosPorAutor("La Iliada y La Odisea");
+        long end= System.nanoTime();
+        return  end-start;
+    }
+    public long listarTime(){
+        long start = System.nanoTime();
+        System.out.println(listarLibrosOrdenadosPorTitulo());
+
+        long end= System.nanoTime();
+        return end-start;
     }
 
     }

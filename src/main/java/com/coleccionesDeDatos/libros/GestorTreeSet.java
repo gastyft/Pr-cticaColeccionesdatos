@@ -3,7 +3,7 @@ package com.coleccionesDeDatos.libros;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class GestorTreeSet implements GestorLibros {
+public class GestorTreeSet implements GestorLibros,TiemposCalculables {
 
     Set<Libro> libroTreeSet = new TreeSet<>(Comparator.comparing(Libro::getTitulo)); // Decirle como queres acomodar
 
@@ -67,5 +67,46 @@ public class GestorTreeSet implements GestorLibros {
         return flag;
     }
 
+    public long agregarTime() {
+        long startTime = System.nanoTime();
+
+// calculo tiempos
+
+        Libro libro1 = new Libro("Baron Rojo", "Saint", 1930);
+        agregarLibro(libro1);
+        Libro libro2 = new Libro("El curioso caso de Benjamín Button", "Scott Fitzgerald", 1921);
+        agregarLibro(libro2);
+        Libro libro3 = new Libro("La Iliada y La Odisea", "Homero", -1500);
+        agregarLibro(libro3);
+
+// Por ejemplo, realizar una operación intensiva en términos de tiempo
+
+        long endTime = System.nanoTime();
+
+
+        return endTime - startTime;
+    }
+
+    public long eliminarTime() {
+        long start = System.nanoTime();
+        eliminarLibro("Baron Rojo");
+        long end = System.nanoTime();
+
+        return end - start;
+    }
+
+    public long buscarTime(){
+        long start=System.nanoTime();
+        buscarLibrosPorAutor("La Iliada y La Odisea");
+        long end= System.nanoTime();
+        return  end-start;
+    }
+    public long listarTime(){
+        long start = System.nanoTime();
+        System.out.println(listarLibrosOrdenadosPorTitulo());
+
+        long end= System.nanoTime();
+        return end-start;
+    }
 
 }

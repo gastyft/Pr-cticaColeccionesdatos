@@ -76,7 +76,7 @@ public class Libro implements  Comparable<Libro> { //Se puede utilizar compareTo
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitulo(), getAutor());
+        return Objects.hash(titulo, autor,anioPublicacion);
     }
 
 }
